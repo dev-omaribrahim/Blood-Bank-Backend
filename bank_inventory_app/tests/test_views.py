@@ -1,18 +1,26 @@
-from django.test import TestCase, Client
-from django.urls import reverse
-from rest_framework import status
-from donation_app.models import (
-    InsideDonation, OutsideDonation, ReplaceDonation, DonorProfile, InstituteProfile
-)
-from donation_app.serializers import (
-    InsideDonationSerializer, OutsideDonationSerializer, ReplaceDonationSerializer, DonorProfileSerializer
-)
-from money_manage_app.models import Receipt
-from donation_app import choices
 import datetime
-from django.utils import timezone
 import json
 
+from django.test import Client, TestCase
+from django.urls import reverse
+from django.utils import timezone
+from rest_framework import status
+
+from donation_app import choices
+from donation_app.models import (
+    DonorProfile,
+    InsideDonation,
+    InstituteProfile,
+    OutsideDonation,
+    ReplaceDonation,
+)
+from donation_app.serializers import (
+    DonorProfileSerializer,
+    InsideDonationSerializer,
+    OutsideDonationSerializer,
+    ReplaceDonationSerializer,
+)
+from money_manage_app.models import Receipt
 
 client = Client()
 
@@ -59,9 +67,8 @@ class BankInventoryListTestCase(TestCase):
                 address="Alex",
                 national_id="434343434",
                 blood_type=choices.DONOR_A_POSITIVE,
-                gender=choices.MALE
-
-            )
+                gender=choices.MALE,
+            ),
         )
         outside_obj = OutsideDonation.objects.create(
             donation_type=choices.INSIDE_DONATION,
@@ -74,7 +81,7 @@ class BankInventoryListTestCase(TestCase):
                 hospital_phone="0100000000",
                 hospital_address="Alex",
                 receipt_number=1,
-                items_quantity=1
+                items_quantity=1,
             ),
             general_serial_number="test_general_serial",
         )
@@ -89,7 +96,6 @@ class BankInventoryListTestCase(TestCase):
                 full_name="test_name",
                 phone_number="01000000",
                 address="Alex",
-
             ),
             external_serial_number="external_serial_number",
         )
@@ -99,20 +105,15 @@ class BankInventoryListTestCase(TestCase):
         x = InsideDonationSerializer(z)
         print(x.data)
         response = client.post(
-                    reverse("bank_inventory:bank_inventory_list"),
-                    data=json.dumps(
-                        {
-                            "donation_type": ["inside_donation"],
-                            "unit_type": ["all"],
-                            "analyse_status": ["all"],
-                            "is_separable": ["all"]
-                        }
-                    ),
-                    content_type='application/json'
-                )
+            reverse("bank_inventory:bank_inventory_list"),
+            data=json.dumps(
+                {
+                    "donation_type": ["inside_donation"],
+                    "unit_type": ["all"],
+                    "analyse_status": ["all"],
+                    "is_separable": ["all"],
+                }
+            ),
+            content_type="application/json",
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-
-
-
-

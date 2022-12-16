@@ -1,20 +1,21 @@
 # from donation_app.models import BaseDonation
 import random
+
 from . import choices
 
 blood_convert_dict = {
-   choices.A_POSITIVE: choices.A_GROUP,
-   choices.A_MINUS: choices.A_GROUP,
-   choices.B_POSITIVE: choices.B_GROUP,
-   choices.B_MINUS: choices.B_GROUP,
-   choices.O_POSITIVE: choices.O_GROUP,
-   choices.O_MINUS: choices.O_GROUP,
-   choices.AB_POSITIVE: choices.AB_GROUP,
-   choices.AB_MINUS: choices.AB_GROUP,
-   choices.A_GROUP: choices.A_GROUP,
-   choices.B_GROUP: choices.B_GROUP,
-   choices.O_GROUP: choices.O_GROUP,
-   choices.AB_GROUP: choices.AB_GROUP,
+    choices.A_POSITIVE: choices.A_GROUP,
+    choices.A_MINUS: choices.A_GROUP,
+    choices.B_POSITIVE: choices.B_GROUP,
+    choices.B_MINUS: choices.B_GROUP,
+    choices.O_POSITIVE: choices.O_GROUP,
+    choices.O_MINUS: choices.O_GROUP,
+    choices.AB_POSITIVE: choices.AB_GROUP,
+    choices.AB_MINUS: choices.AB_GROUP,
+    choices.A_GROUP: choices.A_GROUP,
+    choices.B_GROUP: choices.B_GROUP,
+    choices.O_GROUP: choices.O_GROUP,
+    choices.AB_GROUP: choices.AB_GROUP,
 }
 
 
@@ -24,7 +25,7 @@ def generate_serial_number(self):
         choices.RBCs: "RBC",
         choices.PLASMA: "PLS",
         choices.BLOOD_PLATELETS: "TLT",
-        choices.CRYO: "CRY"
+        choices.CRYO: "CRY",
     }
 
     serial_number = ""
@@ -46,6 +47,3 @@ def generate_serial_number(self):
         serial_number = "{}{}".format(serial_number, random_num)
 
     return serial_number
-
-
-

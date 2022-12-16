@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import Bill, Receipt, Prices
+
 from donation_app.models import OutsideDonation
+
+from .models import Bill, Prices, Receipt
 
 
 class ReceiptStackedAdmin(admin.StackedInline):

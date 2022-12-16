@@ -1,48 +1,62 @@
-from django.db import models
-from django.core.validators import MinValueValidator
-from donation_app import choices
 import random
+
+from django.core.validators import MinValueValidator
+from django.db import models
+
+from donation_app import choices
 
 
 class Bill(models.Model):
     bill_serial_number = models.CharField(
-        max_length=255, unique=True,
-        null=True, blank=True, verbose_name="سيريال الفاتورة"
+        max_length=255,
+        unique=True,
+        null=True,
+        blank=True,
+        verbose_name="سيريال الفاتورة",
     )
     patient_name = models.CharField(
-        max_length=255, verbose_name="اسم المريض",
-        null=True, blank=False
+        max_length=255, verbose_name="اسم المريض", null=True, blank=False
     )
     patient_gender = models.CharField(
-        choices=choices.GENDER_CHOICES, max_length=20,
-        null=True, blank=False, verbose_name="الجنس"
+        choices=choices.GENDER_CHOICES,
+        max_length=20,
+        null=True,
+        blank=False,
+        verbose_name="الجنس",
     )
-    patient_age = models.DateField(
-        null=True, blank=False, verbose_name="تاريخ الميلاد"
-    )
+    patient_age = models.DateField(null=True, blank=False, verbose_name="تاريخ الميلاد")
     patient_blood_type = models.CharField(
-        max_length=255, choices=choices.BLOOD_TYPE_CHOICES,
-        null=True, blank=False, verbose_name="فصيلة الدم"
+        max_length=255,
+        choices=choices.BLOOD_TYPE_CHOICES,
+        null=True,
+        blank=False,
+        verbose_name="فصيلة الدم",
     )
     hospital_name = models.CharField(
-        max_length=255, verbose_name="اسم المستشفى",
-        null=True, blank=False
+        max_length=255, verbose_name="اسم المستشفى", null=True, blank=False
     )
     patient_national_id = models.CharField(
-        max_length=255, null=True, blank=False,
-        verbose_name="الرقم القومى / رقم الباسبور"
+        max_length=255,
+        null=True,
+        blank=False,
+        verbose_name="الرقم القومى / رقم الباسبور",
     )
     item_quantity = models.PositiveIntegerField(
-        default=1, validators=[MinValueValidator(1)],
-        null=True, blank=False, verbose_name="عدد الوحدات"
+        default=1,
+        validators=[MinValueValidator(1)],
+        null=True,
+        blank=False,
+        verbose_name="عدد الوحدات",
     )
     total_price = models.DecimalField(
-        max_digits=7, decimal_places=3, null=True, blank=True,
-        verbose_name="سعر الفاتورة"
+        max_digits=7,
+        decimal_places=3,
+        null=True,
+        blank=True,
+        verbose_name="سعر الفاتورة",
     )
     created_at = models.DateField(
-        auto_now_add=True, verbose_name="تاريخ الفاتورة",
-        null=True, blank=True
+        auto_now_add=True, verbose_name="تاريخ الفاتورة", null=True, blank=True
     )
 
     def save(self, *args, **kwargs):
@@ -64,31 +78,30 @@ class Bill(models.Model):
 
 class Receipt(models.Model):
     hospital_name = models.CharField(
-        max_length=255, null=False, blank=False,
-        verbose_name="اسم المستشفى"
+        max_length=255, null=False, blank=False, verbose_name="اسم المستشفى"
     )
     hospital_phone = models.CharField(
-        max_length=255, null=True, blank=False,
-        verbose_name="رقم المستشفى"
+        max_length=255, null=True, blank=False, verbose_name="رقم المستشفى"
     )
     hospital_address = models.CharField(
-        max_length=255, null=True, blank=False,
-        verbose_name="عنوان المستشفى"
+        max_length=255, null=True, blank=False, verbose_name="عنوان المستشفى"
     )
     hospital_general_serial_number = models.CharField(
-        max_length=255, null=False, blank=False,
-        verbose_name="سيريال نمبر المستشفى"
+        max_length=255, null=False, blank=False, verbose_name="سيريال نمبر المستشفى"
     )
     receipt_number = models.PositiveIntegerField(
-        validators=[MinValueValidator(1)], unique=True,
-        null=True, blank=True, verbose_name="رقم الايصال"
+        validators=[MinValueValidator(1)],
+        unique=True,
+        null=True,
+        blank=True,
+        verbose_name="رقم الايصال",
     )
-    receipt_date = models.DateField(
-        auto_now_add=True, verbose_name="تاريخ الايصال"
-    )
+    receipt_date = models.DateField(auto_now_add=True, verbose_name="تاريخ الايصال")
     items_quantity = models.PositiveIntegerField(
-        validators=[MinValueValidator(1)], null=True,
-        blank=True, verbose_name="عدد الوحدات"
+        validators=[MinValueValidator(1)],
+        null=True,
+        blank=True,
+        verbose_name="عدد الوحدات",
     )
 
     class Meta:
@@ -120,12 +133,18 @@ class Receipt(models.Model):
 
 class Prices(models.Model):
     unit_type = models.CharField(
-        max_length=100, choices=choices.UNIT_TYPE_CHOICES,
-        verbose_name="نوع الوحدة", null=True, blank=False
+        max_length=100,
+        choices=choices.UNIT_TYPE_CHOICES,
+        verbose_name="نوع الوحدة",
+        null=True,
+        blank=False,
     )
     unit_price = models.DecimalField(
-        max_digits=5, decimal_places=2, null=True, blank=False,
-        verbose_name="سعر الوحدة"
+        max_digits=5,
+        decimal_places=2,
+        null=True,
+        blank=False,
+        verbose_name="سعر الوحدة",
     )
 
     class Meta:

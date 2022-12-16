@@ -77,7 +77,7 @@ UNIT_TYPE_CHOICES = (
     (RBCs, "RPCs"),
     (PLASMA, "بلازما"),
     (BLOOD_PLATELETS, "صفائح دموية"),
-    (CRYO, "cryo")
+    (CRYO, "cryo"),
 )
 
 
@@ -118,27 +118,17 @@ UNITE_NOTES_CHOICES = (
 EXCHANGE_STATUS_CHOICES = (
     (AVAILABLE_FOR_EXCHANGE, "قابل للصرف"),
     (NOT_AVAILABLE_FOR_EXCHANGE, "غير قابل للصرف"),
-    (EXECUTED, "معدم")
+    (EXECUTED, "معدم"),
 )
 
 
-GENDER_CHOICES = (
-    (MALE, "ذكر"),
-    (FEMALE, "انثى")
-)
+GENDER_CHOICES = ((MALE, "ذكر"), (FEMALE, "انثى"))
 
 
-ANALYSE_STATUS = (
-    (PENDING, "pending"),
-    (FREE, "free"),
-    (DAMAGED, "damaged")
-)
+ANALYSE_STATUS = ((PENDING, "pending"), (FREE, "free"), (DAMAGED, "damaged"))
 
 
-OPERATION_TYPE = (
-    (IMPORT, "استيراد"),
-    (EXPORT, "تصدير")
-)
+OPERATION_TYPE = ((IMPORT, "استيراد"), (EXPORT, "تصدير"))
 
 
 DONATION_EXPIRATION_SCOPE_CHOICES = (
@@ -146,5 +136,5 @@ DONATION_EXPIRATION_SCOPE_CHOICES = (
     (SCOPE_42, "42 يوم"),
     (SCOPE_180, "180 يوم"),
     (SCOPE_365, "365 يوم"),
-    (SCOPE_5, "5 ايام")
+    (SCOPE_5, "5 ايام"),
 )

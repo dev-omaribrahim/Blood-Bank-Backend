@@ -1,8 +1,8 @@
 from rest_framework import serializers
+
+from donation_app.models import InsideDonation, OutsideDonation, ReplaceDonation
+
 from . import models
-from donation_app.models import (
-    InsideDonation, OutsideDonation, ReplaceDonation
-)
 
 
 class ReceiptSerializer(serializers.ModelSerializer):
@@ -44,6 +44,7 @@ class BillSerializer(serializers.ModelSerializer):
 
 # avoiding circular error
 from donation_app.serializers import (
-    InsideDonationSerializer, OutsideDonationSerializer,
-    ReplaceDonationSerializer
+    InsideDonationSerializer,
+    OutsideDonationSerializer,
+    ReplaceDonationSerializer,
 )
